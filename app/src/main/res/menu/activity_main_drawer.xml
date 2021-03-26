@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Productos" />
+        <item
+            android:id="@+id/nav_inproccess"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Proximos vencimientos" />
+        <item
+            android:id="@+id/nav_expiration"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Vencidos" />
+        <item
+            android:id="@+id/nav_add"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Añadir" />
+    </group>
+</menu>
