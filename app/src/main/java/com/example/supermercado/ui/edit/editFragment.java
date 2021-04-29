@@ -43,6 +43,7 @@ import com.bumptech.glide.request.transition.Transition;
 import com.example.supermercado.R;
 import com.example.supermercado.ip;
 import com.example.supermercado.ui.addproduct.addFragment;
+import com.example.supermercado.ui.dialogs.confirmFragment;
 import com.example.supermercado.ui.dialogs.scannerFragment;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -60,17 +61,18 @@ import java.util.concurrent.ExecutionException;
 
 import cz.msebera.android.httpclient.Header;
 
-public class editFragment extends Fragment implements View.OnClickListener, scannerFragment.DialogData{
+public class editFragment extends Fragment implements View.OnClickListener, scannerFragment.DialogData,confirmFragment.DataConfirm{
 
     DatePickerDialog picker;
     EditText code,name,expiration,barcode,description,paymentprice,quantity,price;
     String id;
     ImageView img;
-    Button btn;
+    Button btn,delete;
     int CODE_PERMISSION=301;
     int IMAGE_RESULT=401;
     String path;
     Context context;
+    View redir;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -97,10 +99,12 @@ public class editFragment extends Fragment implements View.OnClickListener, scan
         quantity=root.findViewById(R.id.fragment_edit_quantity);
         price=root.findViewById(R.id.fragment_edit_price);
         btn=root.findViewById(R.id.fragment_edit_send);
+        delete=root.findViewById(R.id.fragment_edit_delete);
 
         expiration.setOnClickListener(this);
         barcode.setOnClickListener(this);
         btn.setOnClickListener(this);
+        delete.setOnClickListener(this);
 
         loaddata();
 
@@ -108,6 +112,7 @@ public class editFragment extends Fragment implements View.OnClickListener, scan
             img.setOnClickListener(this);
         }
 
+        redir=root;
         return root;
     }
 
@@ -161,6 +166,12 @@ public class editFragment extends Fragment implements View.OnClickListener, scan
             startActivityForResult(getPickImageChooserIntent(), IMAGE_RESULT);
         }else if(v.getId()==R.id.fragment_edit_send){
             senddata(v);
+        }else if(v.getId()==R.id.fragment_edit_delete){
+            confirmFragment  dialog=new confirmFragment();
+            dialog.setTargetFragment(editFragment.this, 1);
+            dialog.setStyle(DialogFragment.STYLE_NORMAL,
+                    android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
+            dialog.show(getFragmentManager(), "MyCustomDialog");
         }
     }
 
@@ -347,5 +358,28 @@ public class editFragment extends Fragment implements View.OnClickListener, scan
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
         cursor.moveToFirst();
         return cursor.getString(column_index);
+    }
+
+    @Override
+    public void senddataConfirm(Boolean data) {
+        if (data){
+            deleteProduct();
+        }
+    }
+
+    private void deleteProduct() {
+        AsyncHttpClient client=new AsyncHttpClient();
+        client.delete(ip.ip+"/product/product/"+id,null,new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                try {
+                    Toast.makeText(context, ""+response.getString("message"), Toast.LENGTH_SHORT).show();
+                    Navigation.findNavController(redir).navigate(R.id.action_nav_edit_to_nav_home);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

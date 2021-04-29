@@ -6,6 +6,9 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -75,7 +78,7 @@ public class inProccess extends Fragment implements AdapterProduct.DataIdDetails
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                handler.removeCallbacks(runnable);
             }
 
             @Override

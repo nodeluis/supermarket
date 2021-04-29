@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -13,7 +14,7 @@ import android.widget.Button;
 
 import com.example.supermercado.R;
 
-public class confirmFragment extends Fragment implements View.OnClickListener {
+public class confirmFragment extends DialogFragment implements View.OnClickListener {
 
     Button cancel,ok;
     Context context;
@@ -53,8 +54,10 @@ public class confirmFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         if(view.getId()==R.id.fargment_confirm_cancel){
             listen.senddataConfirm(false);
+            getDialog().dismiss();
         }else if(view.getId()==R.id.fargment_confirm_ok){
             listen.senddataConfirm(true);
+            getDialog().dismiss();
         }
     }
 

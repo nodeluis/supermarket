@@ -37,8 +37,8 @@ public class scannerFragment extends DialogFragment {
         View root=inflater.inflate(R.layout.fragment_scanner, container, false);
 
         CodeScannerView scannerView = root.findViewById(R.id.scanner_view);
-
         mCodeScanner = new CodeScanner(context, scannerView);
+        mCodeScanner.setFormats(mCodeScanner.ALL_FORMATS);
         mCodeScanner.setDecodeCallback(new DecodeCallback() {
             @Override
             public void onDecoded(@NonNull final Result result) {

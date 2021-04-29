@@ -6,6 +6,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
     tools:context=".ui.edit.editFragment"
     android:orientation="vertical"
     android:gravity="center">
@@ -223,10 +224,33 @@ xmlns:android="http://schemas.android.com/apk/res/android">
             android:inputType="numberDecimal"
             android:layout_weight="2"/>
     </LinearLayout>
-    <Button
-        android:id="@+id/fragment_edit_send"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enviar"/>
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1">
+            <Button
+                android:id="@+id/fragment_edit_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enviar"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1">
+            <Button
+                android:id="@+id/fragment_edit_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Eliminar producto"/>
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -5,17 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment"
+    android:focusableInTouchMode="true"
     android:gravity="center"
     android:orientation="vertical">
 
-    <SearchView
-        android:id="@+id/HomesearchView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:queryHint="Búsqueda"
-        android:iconifiedByDefault="false"
-        android:layout_alignParentTop="true"
-        />
+        android:orientation="horizontal"
+        android:weightSum="5">
+        <SearchView
+            android:id="@+id/HomesearchView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:queryHint="Búsqueda"
+            android:iconifiedByDefault="false"
+            android:layout_alignParentTop="true"
+            />
+        <EditText
+            android:id="@+id/home_skip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="number"
+            android:hint="Salto"/>
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/HomeRecycler"
         android:layout_width="match_parent"

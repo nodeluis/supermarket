@@ -16,10 +16,10 @@
         app:flashButtonVisible="true"
         app:frameColor="@android:color/white"
         app:frameCornersSize="50dp"
-        app:frameCornersRadius="0dp"
+        app:frameCornersRadius="50dp"
         app:frameAspectRatioWidth="1"
         app:frameAspectRatioHeight="1"
-        app:frameSize="0.75"
+        app:frameSize="0.9"
         app:frameThickness="2dp"
         app:maskColor="#77000000"/>
 

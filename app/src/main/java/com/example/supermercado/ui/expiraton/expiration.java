@@ -72,7 +72,7 @@ public class expiration extends Fragment implements AdapterProduct.DataIdDetails
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                handler.removeCallbacks(runnable);
             }
 
             @Override
